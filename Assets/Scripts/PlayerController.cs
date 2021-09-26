@@ -10,12 +10,14 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float repeatDistance;
 
+    private float bufferDistance = 20.0f;
+
     private Vector3 startPosition;
 
 
     private void Awake()
     {
-        repeatDistance = level.GetComponentInChildren<BoxCollider>().bounds.size.z / 2;
+        repeatDistance = level.GetComponentInChildren<BoxCollider>().bounds.size.z - bufferDistance;
         startPosition = transform.position;
     }
 
@@ -23,8 +25,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.forward * (Time.deltaTime * speed));
-
-        Vector3 levelTransform = level.transform.position;
 
         if (transform.position.z >= repeatDistance)
         {
