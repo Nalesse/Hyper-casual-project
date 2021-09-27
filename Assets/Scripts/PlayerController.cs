@@ -5,19 +5,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private const float BufferDistance = 20.0f;
+    private float repeatDistance;
+    private Vector3 startPosition;
+
+    [SerializeField] private float keyCount;
+    private float speedMultiplier = 0.2f;
+
+    #region Serialized Fields
     [SerializeField] private float speed;
     [SerializeField] private GameObject level;
-
-    [SerializeField] private float repeatDistance;
-
-    private float bufferDistance = 20.0f;
-
-    private Vector3 startPosition;
+    #endregion
 
 
     private void Awake()
     {
-        repeatDistance = level.GetComponentInChildren<BoxCollider>().bounds.size.z - bufferDistance;
+        repeatDistance = level.GetComponentInChildren<BoxCollider>().bounds.size.z - BufferDistance;
         startPosition = transform.position;
     }
 
@@ -32,4 +35,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("key"))
+        {
+            keyCount += 1;
+            speed += speedMultiplier * keyCount;
+
+            if (speed > 25)
+            {
+                speed = 25;
+            }
+            
+        }
+    }
 }
