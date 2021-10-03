@@ -6,6 +6,8 @@ public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] private GameObject groundTile;
 
+    [SerializeField] private int tilesToPreSpawn;
+
     private Vector3 nextSpawnPoint;
 
     public void SpawnTile()
@@ -17,7 +19,7 @@ public class LevelGenerator : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < tilesToPreSpawn; i++)
         {
             SpawnTile();
         }

@@ -427,6 +427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundTile: {fileID: 7129630492468383363, guid: 21bd8f3bd01221c47a6346a4c49e1cbf,
     type: 3}
+  tilesToPreSpawn: 15
 --- !u!4 &1796149546 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5032524675451012728, guid: 81965c5dd5459c1499789a107d6f5e33,
