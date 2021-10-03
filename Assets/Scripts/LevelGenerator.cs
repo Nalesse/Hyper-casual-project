@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
+    [SerializeField] private GameObject groundTile;
 
-    [SerializeField] private int tilesToPreSpawn;
-    [SerializeField] private Transform startPoint;
-    [SerializeField] private PlatformTile tilePrefab;
-    // Start is called before the first frame update
-    void Start()
+    private Vector3 nextSpawnPoint;
+
+    public void SpawnTile()
     {
-        Vector3 spawnPosition = startPoint.position;
-        for(int i = 0; i < tilesToPreSpawn; i++)
+        GameObject spawnedTile = Instantiate(groundTile, nextSpawnPoint, Quaternion.identity);
+        nextSpawnPoint = spawnedTile.transform.GetChild(1).transform.position;
+    }
+
+    // Start is called before the first frame update
+    private void Start()
+    {
+        for (int i = 0; i < 15; i++)
         {
-            spawnPosition -= tilePrefab.startPoint.localPosition;
-            PlatformTile spawnedtile = Instantiate(tilePrefab, spawnPosition, Quaternion.identity) as PlatformTile;
+            SpawnTile();
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
