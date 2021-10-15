@@ -145,7 +145,8 @@ MonoBehaviour:
   leftPos: -4
   middlePos: 0
   rightPos: 4
-  smoothing: 0.196
+  smoothing: 0.169
+  swipeRange: 50
 --- !u!54 &5032524675451012678
 Rigidbody:
   m_ObjectHideFlags: 0

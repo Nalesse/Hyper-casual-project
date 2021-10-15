@@ -27,6 +27,15 @@ public class PlayerController : MonoBehaviour
     private float smoothing;
     #endregion
 
+    #region Touch Variables
+
+    private Vector2 startTouchPosition;
+    private Vector2 currentPosition;
+    private bool stopTouch = false;
+    [Header("Touch Variables")]
+    [SerializeField] private float swipeRange;
+    #endregion
+
     private void Update()
     {
         transform.Translate(Vector3.forward * (Time.deltaTime * speed));
@@ -36,27 +45,48 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        // Sets the players position to the current snap point by interpolating between the players current position and the snap point.
-        // The reason for this is to smooth out the transition between snap points to make it less jarring. A new vector 3 is created so that only the x axis is effected by the lerp.
-        var playerPos = transform.position;
-        Vector3 xPos = playerPos;
-        xPos.x = Mathf.Lerp(playerPos.x, snapPos.x, smoothing);
-        transform.position = xPos;
+        MovePlayer();
     }
 
     private void PlayerInput()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            // Decreases the move index by 1 and then sets the current snap point to the one that is on the left
-            moveIndex -= 1;
-            SetSnapPos();
+            startTouchPosition = Input.GetTouch(0).position;
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
         {
-            // Increases the move index by 1 and then sets the current snap point to the one that is on the right
-            moveIndex += 1;
-            SetSnapPos();
+            currentPosition = Input.GetTouch(0).position;
+            Vector2 distance = currentPosition - startTouchPosition;
+
+
+            if (!stopTouch)
+            {
+                if (distance.x < -swipeRange)
+                {
+                    Debug.Log("Swiped Left");
+                    stopTouch = true;
+
+                    // Decreases the move index by 1 and then sets the snap point to the one that is on the left of the current snap point 
+                    moveIndex -= 1;
+                    SetSnapPos();
+                }
+                else if (distance.x > swipeRange)
+                {
+                    Debug.Log("Swiped Right");
+                    stopTouch = true;
+
+                    // Increases the move index by 1 and then sets the snap point to the one that is on the right of the current snap point
+                    moveIndex += 1;
+                    SetSnapPos();
+                }
+            }
+        }
+
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        {
+            stopTouch = false;
         }
     }
 
@@ -82,6 +112,16 @@ public class PlayerController : MonoBehaviour
         snapPos.x = posValues[moveIndex];
     }
 
+    private void MovePlayer()
+    {
+        // Sets the players position to the current snap point by interpolating between the players current position and the snap point.
+        // The reason for this is to smooth out the transition between snap points to make it less jarring. A new vector 3 is created so that only the x axis is affected by the lerp.
+        var playerPos = transform.position;
+        Vector3 xPos = playerPos;
+        xPos.x = Mathf.Lerp(playerPos.x, snapPos.x, smoothing);
+        transform.position = xPos;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("key"))
@@ -93,7 +133,6 @@ public class PlayerController : MonoBehaviour
             {
                 speed = 25;
             }
-
         }
     }
 }
