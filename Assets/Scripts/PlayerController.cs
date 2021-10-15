@@ -8,18 +8,78 @@ public class PlayerController : MonoBehaviour
 
     private float speedMultiplier = 0.2f;
 
+    private Vector3 snapPos;
+    private int moveIndex = 1;
+
     #region Serialized Fields
     [SerializeField] private float speed;
     [SerializeField] private float keyCount;
+
+    [Header("Player Snap Positions")]
+    [SerializeField] private float leftPos;
+    [SerializeField] private float middlePos;
+    [SerializeField] private float rightPos;
+
+    [Header("Left and Right Smoothing")]
+    [Range(0.0f, 1.0f)]
+    [Tooltip("Closer to 0 adds more smoothing, closer to 1 adds less smoothing")]
+    [SerializeField]
+    private float smoothing;
     #endregion
 
-
-
+    private void Update()
+    {
+        transform.Translate(Vector3.forward * (Time.deltaTime * speed));
+        PlayerInput();
+    }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        transform.Translate(Vector3.forward * (Time.deltaTime * speed));
+        // Sets the players position to the current snap point by interpolating between the players current position and the snap point.
+        // The reason for this is to smooth out the transition between snap points to make it less jarring. A new vector 3 is created so that only the x axis is effected by the lerp.
+        var playerPos = transform.position;
+        Vector3 xPos = playerPos;
+        xPos.x = Mathf.Lerp(playerPos.x, snapPos.x, smoothing);
+        transform.position = xPos;
+    }
+
+    private void PlayerInput()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            // Decreases the move index by 1 and then sets the current snap point to the one that is on the left
+            moveIndex -= 1;
+            SetSnapPos();
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            // Increases the move index by 1 and then sets the current snap point to the one that is on the right
+            moveIndex += 1;
+            SetSnapPos();
+        }
+    }
+
+    private void SetSnapPos()
+    {
+        // Makes sure that the moveIndex is not outside the bounds of the array
+        if (moveIndex < 0)
+        {
+            moveIndex = 0;
+        }
+
+        if (moveIndex > 2)
+        {
+            moveIndex = 2;
+        }
+
+        // Stores the x values for the  snap points 
+        float[] posValues = { leftPos, middlePos, rightPos };
+
+        // Sets the snap position to the players position then sets the x component to the current index of the position array to get the final snap point.
+        var playerPos = transform;
+        snapPos = playerPos.position;
+        snapPos.x = posValues[moveIndex];
     }
 
     private void OnTriggerEnter(Collider other)
@@ -33,7 +93,7 @@ public class PlayerController : MonoBehaviour
             {
                 speed = 25;
             }
-            
+
         }
     }
 }

@@ -142,6 +142,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   keyCount: 0
+  leftPos: -4
+  middlePos: 0
+  rightPos: 4
+  smoothing: 0.196
 --- !u!54 &5032524675451012678
 Rigidbody:
   m_ObjectHideFlags: 0
