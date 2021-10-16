@@ -14,6 +14,8 @@ public class LevelGenerator : MonoBehaviour
     {
         GameObject spawnedTile = Instantiate(groundTile, nextSpawnPoint, Quaternion.identity);
         nextSpawnPoint = spawnedTile.transform.GetChild(1).transform.position;
+
+
     }
 
     // Start is called before the first frame update

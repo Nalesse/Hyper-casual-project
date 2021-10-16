@@ -6,12 +6,13 @@ using Random = UnityEngine.Random;
 
 public class GroundTile : MonoBehaviour
 {
+    private GameObject spawnedObstacle;
     private LevelGenerator levelGenerator;
 
     [SerializeField] private GameObject obstaclePrefab;
 
     // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
         levelGenerator = GameObject.FindObjectOfType<LevelGenerator>();
     }
@@ -28,17 +29,18 @@ public class GroundTile : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
 
-    private void SpawnObstacle()
+    public void SpawnObstacle()
     {
         int obstacleSpawnIndex = Random.Range(2, 5);
         Transform parent = transform;
         Transform spawnPoint = parent.GetChild(obstacleSpawnIndex).transform;
-
         Instantiate(obstaclePrefab, spawnPoint.position, Quaternion.identity, parent);
+
     }
+
 }

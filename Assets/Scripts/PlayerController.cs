@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     #region Serialized Fields
     [SerializeField] private float speed;
-    [SerializeField] private float keyCount;
+    [SerializeField] private int keyCount;
 
     [Header("Player Snap Positions")]
     [SerializeField] private float leftPos;
@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float swipeRange;
     #endregion
 
+
     private void Update()
     {
         transform.Translate(Vector3.forward * (Time.deltaTime * speed));
@@ -50,44 +51,58 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerInput()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (Input.touchCount <= 0)
         {
-            startTouchPosition = Input.GetTouch(0).position;
+            return;
         }
-
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        
+        switch (Input.GetTouch(0).phase)
         {
-            currentPosition = Input.GetTouch(0).position;
-            Vector2 distance = currentPosition - startTouchPosition;
-
-
-            if (!stopTouch)
-            {
-                if (distance.x < -swipeRange)
+            case TouchPhase.Began:
                 {
-                    Debug.Log("Swiped Left");
-                    stopTouch = true;
-
-                    // Decreases the move index by 1 and then sets the snap point to the one that is on the left of the current snap point 
-                    moveIndex -= 1;
-                    SetSnapPos();
+                    startTouchPosition = Input.GetTouch(0).position;
+                    break;
                 }
-                else if (distance.x > swipeRange)
+
+            case TouchPhase.Moved:
                 {
-                    Debug.Log("Swiped Right");
-                    stopTouch = true;
+                    if (stopTouch)
+                    {
+                        break;
+                    }
+                    
+                    currentPosition = Input.GetTouch(0).position;
+                    Vector2 distance = currentPosition - startTouchPosition;
 
-                    // Increases the move index by 1 and then sets the snap point to the one that is on the right of the current snap point
-                    moveIndex += 1;
-                    SetSnapPos();
+                    if (distance.x < -swipeRange)
+                    {
+                        Debug.Log("Swiped Left");
+                        stopTouch = true;
+
+                        // Decreases the move index by 1 and then sets the snap point to the one that is on the left of the current snap point
+                        moveIndex -= 1;
+                        SetSnapPos();
+                    }
+                    else if (distance.x > swipeRange)
+                    {
+                        Debug.Log("Swiped Right");
+                        stopTouch = true;
+
+                        // Increases the move index by 1 and then sets the snap point to the one that is on the right of the current snap point
+                        moveIndex += 1;
+                        SetSnapPos();
+                    }
+
+                    break;
                 }
-            }
+
+            case TouchPhase.Ended:
+                {
+                    stopTouch = false;
+                    break;
+                }
         }
 
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
-        {
-            stopTouch = false;
-        }
     }
 
     private void SetSnapPos()
@@ -127,12 +142,19 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("key"))
         {
             keyCount += 1;
-            speed += speedMultiplier * keyCount;
+            speed += Mathf.Round(speedMultiplier * keyCount);
 
             if (speed > 25)
             {
                 speed = 25;
             }
         }
+
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
+            keyCount -= 1;
+            speed -= Mathf.Round(speedMultiplier * this.keyCount);
+        }
     }
+
 }
