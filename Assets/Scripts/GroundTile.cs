@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class GroundTile : MonoBehaviour
 {
-    private GameObject spawnedObstacle;
+    [SerializeField] private GameObject keyPrefab;
     private LevelGenerator levelGenerator;
 
     [SerializeField] private GameObject obstaclePrefab;
@@ -20,6 +20,7 @@ public class GroundTile : MonoBehaviour
     private void Start()
     {
         SpawnObstacle();
+        SpawnKeys();
     }
 
     private void OnTriggerExit(Collider other)
@@ -42,5 +43,28 @@ public class GroundTile : MonoBehaviour
         Instantiate(obstaclePrefab, spawnPoint.position, Quaternion.identity, parent);
 
     }
+
+    private void SpawnKeys()
+    {
+        int keysToSpawn = 2;
+        for (int i = 0; i < keysToSpawn; i++)
+        {
+            var temp = Instantiate(keyPrefab,transform);
+            temp.transform.position = GetRandomPoint();
+        }
+    }
+
+    private Vector3 GetRandomPoint()
+    {
+        var col = transform.GetComponent<Collider>().bounds;
+        Vector3 point = new Vector3(
+            Random.Range(col.min.x, col.max.x),
+            Random.Range(col.min.y, col.max.y),
+            Random.Range(col.min.z, col.max.z));
+
+        point.y = 1;
+        return point;
+    }
+
 
 }

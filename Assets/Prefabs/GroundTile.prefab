@@ -248,6 +248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424bb3920da6b194e92f5b925e903ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keyPrefab: {fileID: 2997527957931306092, guid: e9ad2ee655eab6644afc8fe678af5173,
+    type: 3}
   obstaclePrefab: {fileID: 2947338293259449855, guid: 1dd0381db38fd554788c2b5d021f4560,
     type: 3}
 --- !u!1 &7129630493932320164
