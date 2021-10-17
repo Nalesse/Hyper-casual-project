@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     #region Serialized Fields
     [SerializeField] private float speed;
     [SerializeField] private int keyCount;
+    [SerializeField] private SimpleFlash flashEffect;
 
     [Header("Player Snap Positions")]
     [SerializeField] private float leftPos;
@@ -139,21 +140,35 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // if statements are to avoid issues with negative numbers, other issues
         if (other.gameObject.CompareTag("key"))
         {
             keyCount += 1;
-            speed += Mathf.Round(speedMultiplier * keyCount);
-
+            if (keyCount > 35)
+            {
+                keyCount = 35;
+            }
+            speed += Mathf.Clamp(speedMultiplier * keyCount, 0.2f, 3);
             if (speed > 25)
             {
                 speed = 25;
             }
+            Destroy(other.gameObject);
         }
 
         if (other.gameObject.CompareTag("Obstacle"))
         {
-            keyCount -= 1;
-            speed -= Mathf.Round(speedMultiplier * this.keyCount);
+            keyCount -= 4;
+            if (keyCount <= 0)
+            {
+                keyCount = 0;
+            }
+            speed -= Mathf.Clamp(speedMultiplier * keyCount, 0.2f, 3);
+            if (speed < 8)
+            {
+                speed = 8;
+            }
+            flashEffect.Flash();
         }
     }
 

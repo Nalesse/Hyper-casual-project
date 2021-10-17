@@ -1,15 +1,15 @@
 using System;
 
 using UnityEngine;
+using UnityEngine.Serialization;
 
 using Random = UnityEngine.Random;
 
 public class GroundTile : MonoBehaviour
 {
-    [SerializeField] private GameObject keyPrefab;
     private LevelGenerator levelGenerator;
 
-    [SerializeField] private GameObject obstaclePrefab;
+    [SerializeField] private GameObject[] items;
 
     // Start is called before the first frame update
     private void Awake()
@@ -19,8 +19,7 @@ public class GroundTile : MonoBehaviour
 
     private void Start()
     {
-        SpawnObstacle();
-        SpawnKeys();
+        SpawnItems();
     }
 
     private void OnTriggerExit(Collider other)
@@ -29,41 +28,14 @@ public class GroundTile : MonoBehaviour
         Destroy(gameObject, 2);
     }
 
-    // Update is called once per frame
-    private void Update()
+    public void SpawnItems()
     {
-        
-    }
-
-    public void SpawnObstacle()
-    {
-        int obstacleSpawnIndex = Random.Range(2, 5);
+        int itemSpawnPosIndex = Random.Range(2, 5);
+        int itemIndex = Random.Range(0, items.Length);
         Transform parent = transform;
-        Transform spawnPoint = parent.GetChild(obstacleSpawnIndex).transform;
-        Instantiate(obstaclePrefab, spawnPoint.position, Quaternion.identity, parent);
+        Transform spawnPoint = parent.GetChild(itemSpawnPosIndex).transform;
+        Instantiate(items[itemIndex], spawnPoint.position, Quaternion.identity, parent);
 
-    }
-
-    private void SpawnKeys()
-    {
-        int keysToSpawn = 2;
-        for (int i = 0; i < keysToSpawn; i++)
-        {
-            var temp = Instantiate(keyPrefab,transform);
-            temp.transform.position = GetRandomPoint();
-        }
-    }
-
-    private Vector3 GetRandomPoint()
-    {
-        var col = transform.GetComponent<Collider>().bounds;
-        Vector3 point = new Vector3(
-            Random.Range(col.min.x, col.max.x),
-            Random.Range(col.min.y, col.max.y),
-            Random.Range(col.min.z, col.max.z));
-
-        point.y = 1;
-        return point;
     }
 
 
