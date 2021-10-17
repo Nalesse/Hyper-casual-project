@@ -7,13 +7,12 @@ public class PlayerController : MonoBehaviour
 {
 
     private float speedMultiplier = 0.2f;
-
+    private GameManager gameManager;
     private Vector3 snapPos;
     private int moveIndex = 1;
 
     #region Serialized Fields
     [SerializeField] private float speed;
-    [SerializeField] private int keyCount;
     [SerializeField] private SimpleFlash flashEffect;
 
     [Header("Player Snap Positions")]
@@ -32,11 +31,15 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 startTouchPosition;
     private Vector2 currentPosition;
-    private bool stopTouch = false;
+    private bool stopTouch;
     [Header("Touch Variables")]
     [SerializeField] private float swipeRange;
     #endregion
 
+    private void Awake()
+    {
+        gameManager = GameObject.FindObjectOfType<GameManager>();
+    }
 
     private void Update()
     {
@@ -50,13 +53,15 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
     }
 
+    #region PlayerMovement
+
     private void PlayerInput()
     {
         if (Input.touchCount <= 0)
         {
             return;
         }
-        
+
         switch (Input.GetTouch(0).phase)
         {
             case TouchPhase.Began:
@@ -71,7 +76,7 @@ public class PlayerController : MonoBehaviour
                     {
                         break;
                     }
-                    
+
                     currentPosition = Input.GetTouch(0).position;
                     Vector2 distance = currentPosition - startTouchPosition;
 
@@ -138,36 +143,43 @@ public class PlayerController : MonoBehaviour
         transform.position = xPos;
     }
 
+    #endregion
+
+
     private void OnTriggerEnter(Collider other)
     {
         // if statements are to avoid issues with negative numbers, other issues
         if (other.gameObject.CompareTag("key"))
         {
-            keyCount += 1;
-            if (keyCount > 35)
+            gameManager.keyCount += 1;
+            if (gameManager.keyCount > 35)
             {
-                keyCount = 35;
+                gameManager.keyCount = 35;
             }
-            speed += Mathf.Clamp(speedMultiplier * keyCount, 0.2f, 3);
-            if (speed > 25)
+
+            speed += Mathf.Clamp(speedMultiplier * gameManager.keyCount, 0.2f, 3);
+            if (speed > gameManager.MaxSpeed)
             {
-                speed = 25;
+                speed = gameManager.MaxSpeed;
             }
+
             Destroy(other.gameObject);
         }
 
         if (other.gameObject.CompareTag("Obstacle"))
         {
-            keyCount -= 4;
-            if (keyCount <= 0)
+            gameManager.keyCount -= 4;
+            if (gameManager.keyCount <= 0)
             {
-                keyCount = 0;
+                gameManager.keyCount = 0;
             }
-            speed -= Mathf.Clamp(speedMultiplier * keyCount, 0.2f, 3);
+
+            speed -= Mathf.Clamp(speedMultiplier * gameManager.keyCount, 0.2f, 3);
             if (speed < 8)
             {
                 speed = 8;
             }
+
             flashEffect.Flash();
         }
     }
