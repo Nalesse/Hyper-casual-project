@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 5032524675451012729}
   - component: {fileID: -457177862874598550}
   - component: {fileID: 5032524675451012678}
+  - component: {fileID: 7786479600382592001}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -142,7 +143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  keyCount: 0
   flashEffect: {fileID: -457177862874598550}
   leftPos: -4
   middlePos: 0
@@ -179,3 +179,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &7786479600382592001
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5032524675451012731}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0008235, y: 1, z: 1.0063599}
+  m_Center: {x: 0.001682207, y: 0, z: -0.003179729}

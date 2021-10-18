@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     private float speedMultiplier = 0.2f;
     private GameManager gameManager;
+    private Enemy enemy;
     private Vector3 snapPos;
     private int moveIndex = 1;
 
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
+        enemy = GameObject.FindObjectOfType<Enemy>();
     }
 
     private void Update()
@@ -82,7 +84,6 @@ public class PlayerController : MonoBehaviour
 
                     if (distance.x < -swipeRange)
                     {
-                        Debug.Log("Swiped Left");
                         stopTouch = true;
 
                         // Decreases the move index by 1 and then sets the snap point to the one that is on the left of the current snap point
@@ -91,7 +92,6 @@ public class PlayerController : MonoBehaviour
                     }
                     else if (distance.x > swipeRange)
                     {
-                        Debug.Log("Swiped Right");
                         stopTouch = true;
 
                         // Increases the move index by 1 and then sets the snap point to the one that is on the right of the current snap point
@@ -152,9 +152,9 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("key"))
         {
             gameManager.keyCount += 1;
-            if (gameManager.keyCount > 35)
+            if (gameManager.keyCount > gameManager.keyWinAmount)
             {
-                gameManager.keyCount = 35;
+                gameManager.keyCount = gameManager.keyWinAmount;
             }
 
             speed += Mathf.Clamp(speedMultiplier * gameManager.keyCount, 0.2f, 3);
@@ -181,6 +181,8 @@ public class PlayerController : MonoBehaviour
             }
 
             flashEffect.Flash();
+            enemy.speed += 1;
+
         }
     }
 

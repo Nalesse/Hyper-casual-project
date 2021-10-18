@@ -1518,7 +1518,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1965,6 +1965,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227026728}
   m_CullTransparentMesh: 1
+--- !u!1 &1276947258 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5032524675451012731, guid: 81965c5dd5459c1499789a107d6f5e33,
+    type: 3}
+  m_PrefabInstance: {fileID: 1527955450}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1276947259
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276947258}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.901226, y: 1, z: 1.5820974}
+  m_Center: {x: -0.023580313, y: 0, z: -0.29104847}
 --- !u!1 &1394823607
 GameObject:
   m_ObjectHideFlags: 0
@@ -2902,7 +2921,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3087,6 +3106,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4183558612464665978, guid: 1aa6cab208901db42bc0b43f825162f9,
         type: 3}
+      propertyPath: MaxSpeed
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183558612464665978, guid: 1aa6cab208901db42bc0b43f825162f9,
+        type: 3}
       propertyPath: gameMenu
       value: 
       objectReference: {fileID: 170181576}
@@ -3103,7 +3127,7 @@ PrefabInstance:
     - target: {fileID: 4183558612464665978, guid: 1aa6cab208901db42bc0b43f825162f9,
         type: 3}
       propertyPath: keyWinAmount
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4183558612464665978, guid: 1aa6cab208901db42bc0b43f825162f9,
         type: 3}
