@@ -5,12 +5,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Cashed Animator parameters 
+    private static readonly int Speed = Animator.StringToHash("Speed");
+    private static readonly int LeftStrafe = Animator.StringToHash("LeftStrafe");
+    private static readonly int RightStrafe = Animator.StringToHash("RightStrafe");
 
     private float speedMultiplier = 0.2f;
     private GameManager gameManager;
     private Enemy enemy;
     private Vector3 snapPos;
     private int moveIndex = 1;
+    private Animator animator;
+
+
 
     #region Serialized Fields
     [SerializeField] private float speed;
@@ -35,18 +42,22 @@ public class PlayerController : MonoBehaviour
     private bool stopTouch;
     [Header("Touch Variables")]
     [SerializeField] private float swipeRange;
+
+
     #endregion
 
     private void Awake()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
         enemy = GameObject.FindObjectOfType<Enemy>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
         transform.Translate(Vector3.forward * (Time.deltaTime * speed));
         PlayerInput();
+        animator.SetFloat(Speed, speed);
     }
 
     // Update is called once per frame
@@ -140,7 +151,36 @@ public class PlayerController : MonoBehaviour
         var playerPos = transform.position;
         Vector3 xPos = playerPos;
         xPos.x = Mathf.Lerp(playerPos.x, snapPos.x, smoothing);
+
+        // Plays strafe animation based on moveIndex
+        switch (moveIndex)
+        {
+            case 0:
+                animator.SetTrigger(LeftStrafe);
+                StartCoroutine(ResetTrigger(LeftStrafe));
+                break;
+            case 2:
+                animator.SetTrigger(RightStrafe);
+                StartCoroutine(ResetTrigger(RightStrafe));
+                break;
+        }
+
         transform.position = xPos;
+    }
+
+    /// <summary>
+    /// Resets the strafe animations
+    /// </summary>
+    /// <param name="trigger">
+    /// which trigger to reset
+    /// </param>
+    /// <returns>
+    /// The amount of time to wait
+    /// </returns>
+    private IEnumerator ResetTrigger(int trigger)
+    {
+        yield return new WaitForSeconds(1f);
+        animator.ResetTrigger(trigger);
     }
 
     #endregion
