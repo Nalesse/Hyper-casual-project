@@ -110,6 +110,20 @@ public class PlayerController : MonoBehaviour
                         SetSnapPos();
                     }
 
+                    // Plays strafe animation based on moveIndex
+                    switch (moveIndex)
+                    {
+                        case 0:
+                            animator.SetTrigger(LeftStrafe);
+                            Debug.Log("Playing left strafe animation");
+                            break;
+                        case 2:
+                            animator.SetTrigger(RightStrafe);
+                            break;
+                        case 1:
+                            break;
+                    }
+
                     break;
                 }
 
@@ -152,35 +166,7 @@ public class PlayerController : MonoBehaviour
         Vector3 xPos = playerPos;
         xPos.x = Mathf.Lerp(playerPos.x, snapPos.x, smoothing);
 
-        // Plays strafe animation based on moveIndex
-        switch (moveIndex)
-        {
-            case 0:
-                animator.SetTrigger(LeftStrafe);
-                StartCoroutine(ResetTrigger(LeftStrafe));
-                break;
-            case 2:
-                animator.SetTrigger(RightStrafe);
-                StartCoroutine(ResetTrigger(RightStrafe));
-                break;
-        }
-
         transform.position = xPos;
-    }
-
-    /// <summary>
-    /// Resets the strafe animations
-    /// </summary>
-    /// <param name="trigger">
-    /// which trigger to reset
-    /// </param>
-    /// <returns>
-    /// The amount of time to wait
-    /// </returns>
-    private IEnumerator ResetTrigger(int trigger)
-    {
-        yield return new WaitForSeconds(1f);
-        animator.ResetTrigger(trigger);
     }
 
     #endregion
