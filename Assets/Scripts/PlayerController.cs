@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int LeftStrafe = Animator.StringToHash("LeftStrafe");
     private static readonly int RightStrafe = Animator.StringToHash("RightStrafe");
+    private static readonly int Stumble = Animator.StringToHash("Stumble");
 
     /// <summary>
     /// How much to increase or decrease the speed
@@ -198,6 +199,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Obstacle"))
         {
+            animator.SetTrigger(Stumble);
             gameManager.keyCount -= 2;
             enemy.speed += 1;
             if (gameManager.keyCount <= 0)
