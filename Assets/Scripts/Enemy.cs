@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     private GameManager gameManager;
     private Transform player;
 
+    [SerializeField] private float maxDistance;
+
 
     private void Awake()
     {
@@ -25,9 +27,9 @@ public class Enemy : MonoBehaviour
         enemyPos.x = player.position.x;
         transform.position = enemyPos;
 
-        if (Vector3.Distance(transform.position, player.transform.position) > 10)
+        if (Vector3.Distance(transform.position, player.transform.position) > maxDistance)
         {
-            enemyPos.z = player.transform.position.z - 3;
+            enemyPos.z = player.transform.position.z - (maxDistance / 2);
             transform.position = enemyPos;
         }
     }
