@@ -10,18 +10,35 @@ public class PlayerController : MonoBehaviour
     private static readonly int LeftStrafe = Animator.StringToHash("LeftStrafe");
     private static readonly int RightStrafe = Animator.StringToHash("RightStrafe");
 
-    private float speedMultiplier = 0.2f;
+    /// <summary>
+    /// How much to increase or decrease the speed
+    /// </summary>
+    private float speedIncrease = 0.5f;
+
+    /// <summary>
+    /// Reference to the GameManager script
+    /// </summary>
     private GameManager gameManager;
+
+    /// <summary>
+    /// Reference to the Enemy script 
+    /// </summary>
     private Enemy enemy;
+
+    /// <summary>
+    /// The current snap position, this values changes depending on the moveIndex variable 
+    /// </summary>
     private Vector3 snapPos;
+
+    /// <summary>
+    /// the index for the array containing the snap positions. Dictates where to move the player.
+    /// </summary>
     private int moveIndex = 1;
+
     private Animator animator;
-
-
 
     #region Serialized Fields
     [SerializeField] private float speed;
-    [SerializeField] private SimpleFlash flashEffect;
 
     [Header("Player Snap Positions")]
     [SerializeField] private float leftPos;
@@ -99,6 +116,7 @@ public class PlayerController : MonoBehaviour
 
                         // Decreases the move index by 1 and then sets the snap point to the one that is on the left of the current snap point
                         moveIndex -= 1;
+                        animator.SetTrigger(LeftStrafe);
                         SetSnapPos();
                     }
                     else if (distance.x > swipeRange)
@@ -107,21 +125,8 @@ public class PlayerController : MonoBehaviour
 
                         // Increases the move index by 1 and then sets the snap point to the one that is on the right of the current snap point
                         moveIndex += 1;
+                        animator.SetTrigger(RightStrafe);
                         SetSnapPos();
-                    }
-
-                    // Plays strafe animation based on moveIndex
-                    switch (moveIndex)
-                    {
-                        case 0:
-                            animator.SetTrigger(LeftStrafe);
-                            Debug.Log("Playing left strafe animation");
-                            break;
-                        case 2:
-                            animator.SetTrigger(RightStrafe);
-                            break;
-                        case 1:
-                            break;
                     }
 
                     break;
@@ -133,7 +138,6 @@ public class PlayerController : MonoBehaviour
                     break;
                 }
         }
-
     }
 
     private void SetSnapPos()
@@ -183,7 +187,7 @@ public class PlayerController : MonoBehaviour
                 gameManager.keyCount = gameManager.keyWinAmount;
             }
 
-            speed += Mathf.Clamp(speedMultiplier * gameManager.keyCount, 0.2f, 3);
+            speed += speedIncrease;
             if (speed > gameManager.MaxSpeed)
             {
                 speed = gameManager.MaxSpeed;
@@ -194,20 +198,18 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Obstacle"))
         {
-            gameManager.keyCount -= 4;
+            gameManager.keyCount -= 2;
+            enemy.speed += 1;
             if (gameManager.keyCount <= 0)
             {
                 gameManager.keyCount = 0;
             }
 
-            speed -= Mathf.Clamp(speedMultiplier * gameManager.keyCount, 0.2f, 3);
+            speed -= speedIncrease;
             if (speed < 8)
             {
                 speed = 8;
             }
-
-            flashEffect.Flash();
-            enemy.speed += 1;
 
         }
     }

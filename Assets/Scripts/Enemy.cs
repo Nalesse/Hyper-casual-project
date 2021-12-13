@@ -20,10 +20,16 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        transform.Translate(Vector3.forward * (Time.deltaTime * this.speed));
+        transform.Translate(Vector3.forward * (Time.deltaTime * speed));
         var enemyPos = transform.position;
         enemyPos.x = player.position.x;
         transform.position = enemyPos;
+
+        if (Vector3.Distance(transform.position, player.transform.position) > 10)
+        {
+            enemyPos.z = player.transform.position.z - 3;
+            transform.position = enemyPos;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
