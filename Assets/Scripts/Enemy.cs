@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     private GameManager gameManager;
     private Transform player;
 
+    [SerializeField] private float maxDistance;
+
 
     private void Awake()
     {
@@ -20,10 +22,16 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        transform.Translate(Vector3.forward * (Time.deltaTime * this.speed));
+        transform.Translate(Vector3.forward * (Time.deltaTime * speed));
         var enemyPos = transform.position;
         enemyPos.x = player.position.x;
         transform.position = enemyPos;
+
+        if (Vector3.Distance(transform.position, player.transform.position) > maxDistance)
+        {
+            enemyPos.z = player.transform.position.z - (maxDistance / 2);
+            transform.position = enemyPos;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

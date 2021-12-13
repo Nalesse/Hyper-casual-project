@@ -30,21 +30,18 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
-        StartCoroutine(CameraLerp());
-
-        if (!doLerp)
+        if (doLerp)
         {
-            transform.position = player.transform.position + offset;
-        }
-        else
-        {
-            var startPos = player.transform.position + offset;
-            var endPos = player.transform.position + endOffset;
+            var startPos = offset;
+            var endPos = endOffset;
             offset.z = endOffset.z;
 
-            transform.position = Vector3.MoveTowards(startPos, endPos, cameraSpeed * Time.deltaTime);
+            //transform.position = Vector3.MoveTowards(startPos, endPos, cameraSpeed * Time.deltaTime);
+            offset = Vector3.MoveTowards(startPos, endPos, cameraSpeed * Time.deltaTime);
         }
-        
+
+        transform.position = player.transform.position + offset;
+
     }
 
     private IEnumerator CameraLerp()

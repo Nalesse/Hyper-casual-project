@@ -1966,25 +1966,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227026728}
   m_CullTransparentMesh: 1
---- !u!1 &1276947258 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5032524675451012731, guid: 81965c5dd5459c1499789a107d6f5e33,
-    type: 3}
-  m_PrefabInstance: {fileID: 1527955450}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1276947259
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1276947258}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.901226, y: 1, z: 1.5820974}
-  m_Center: {x: -0.023580313, y: 0, z: -0.29104847}
 --- !u!1 &1394823607
 GameObject:
   m_ObjectHideFlags: 0
@@ -2131,6 +2112,7 @@ GameObject:
   - component: {fileID: 1458265263}
   - component: {fileID: 1458265262}
   - component: {fileID: 1458265265}
+  - component: {fileID: 1458265266}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2217,8 +2199,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1796149546}
   cameraSpeed: 5
-  endOffset: {x: 0, y: 3.31, z: -3.35}
+  endOffset: {x: 0, y: 2.81, z: -3.35}
   cameraLerpDelay: 5
+--- !u!114 &1458265266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458265261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1001 &1527955450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2291,7 +2305,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -457177862874598550, guid: 81965c5dd5459c1499789a107d6f5e33, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 81965c5dd5459c1499789a107d6f5e33, type: 3}
 --- !u!1 &1609837138
 GameObject:
@@ -3069,6 +3084,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756934972414929723, guid: 766c3a95768be354facaef37d75973c6,
+        type: 3}
+      propertyPath: maxDistance
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8756934972414929725, guid: 766c3a95768be354facaef37d75973c6,
         type: 3}
