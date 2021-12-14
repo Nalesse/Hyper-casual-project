@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerInput()
     {
+        // handles swiping Touch input
         if (Input.touchCount <= 0)
         {
             return;
@@ -179,7 +180,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // if statements are to avoid issues with negative numbers, other issues
+        // Logic for when the player collides with a key
         if (other.gameObject.CompareTag("key"))
         {
             gameManager.keyCount += 1;
@@ -197,6 +198,7 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
         }
 
+        // Logic for when the player collides with an obstacle
         if (other.gameObject.CompareTag("Obstacle"))
         {
             animator.SetTrigger(Stumble);

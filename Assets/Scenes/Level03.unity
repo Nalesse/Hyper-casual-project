@@ -1154,12 +1154,12 @@ PrefabInstance:
     - target: {fileID: 3584447497776065607, guid: 6cdab1529eaebeb4cbf58acac38bf4a4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3584447499362332717, guid: 6cdab1529eaebeb4cbf58acac38bf4a4,
         type: 3}
       propertyPath: m_text
-      value: next level
+      value: main menu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cdab1529eaebeb4cbf58acac38bf4a4, type: 3}
@@ -1577,7 +1577,7 @@ PrefabInstance:
     - target: {fileID: 3584447497776065607, guid: 6cdab1529eaebeb4cbf58acac38bf4a4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3584447499362332717, guid: 6cdab1529eaebeb4cbf58acac38bf4a4,
         type: 3}
@@ -2545,7 +2545,7 @@ PrefabInstance:
     - target: {fileID: 4183558612464665978, guid: 1aa6cab208901db42bc0b43f825162f9,
         type: 3}
       propertyPath: MaxSpeed
-      value: 28
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4183558612464665978, guid: 1aa6cab208901db42bc0b43f825162f9,
         type: 3}
@@ -2570,7 +2570,7 @@ PrefabInstance:
     - target: {fileID: 4183558612464665978, guid: 1aa6cab208901db42bc0b43f825162f9,
         type: 3}
       propertyPath: keyWinAmount
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4183558612464665978, guid: 1aa6cab208901db42bc0b43f825162f9,
         type: 3}

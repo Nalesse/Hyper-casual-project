@@ -67,9 +67,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Updates the key count UI
     private void UpdateKeyUI()
     {
-        keyAmountUI.text = "Keys: " + keyCount + " / " + keyWinAmount;
+        // Avoids errors when the current scene is the Main Menu and it can't find the key text   
+        try
+        {
+            keyAmountUI.text = "Keys: " + keyCount + " / " + keyWinAmount;
+        }
+        catch (NullReferenceException e)
+        {
+            
+        }
+
     }
 
 }

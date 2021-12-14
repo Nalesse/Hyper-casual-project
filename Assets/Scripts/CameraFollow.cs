@@ -32,11 +32,11 @@ public class CameraFollow : MonoBehaviour
     {
         if (doLerp)
         {
+            // Stars a transition from the far cam to the close up cam at the start of the game 
             var startPos = offset;
             var endPos = endOffset;
             offset.z = endOffset.z;
 
-            //transform.position = Vector3.MoveTowards(startPos, endPos, cameraSpeed * Time.deltaTime);
             offset = Vector3.MoveTowards(startPos, endPos, cameraSpeed * Time.deltaTime);
         }
 
@@ -46,6 +46,7 @@ public class CameraFollow : MonoBehaviour
 
     private IEnumerator CameraLerp()
     {
+        // Adds a delay so the camera does not move immediately 
         yield return new WaitForSeconds(cameraLerpDelay);
         doLerp = true;
         

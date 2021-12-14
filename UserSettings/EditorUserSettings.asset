@@ -6,25 +6,31 @@ EditorUserSettings:
   serializedVersion: 4
   m_ConfigSettings:
     RecentlyUsedScenePath-0:
-      value: 22424703114646680e0b0227036c73150012147a7f66333e243d04
-      flags: 0
-    RecentlyUsedScenePath-1:
       value: 224247031146467a01023f2909054d1513583c2f29386614383a167cc6e53128a2c323faec742a323016f6
       flags: 0
-    RecentlyUsedScenePath-2:
+    RecentlyUsedScenePath-1:
       value: 224247031146467a01023f2909054d1513583b25202c661e242e1527adc33b34e6a718e0e0322b722c0ce6281d
       flags: 0
-    RecentlyUsedScenePath-3:
+    RecentlyUsedScenePath-2:
       value: 224247031146467a01023f2909054d15135836232b2032700026123dc0f5262bf6a818e0e0322b7c140de032441c142de11e471ef8021e12
       flags: 0
-    RecentlyUsedScenePath-4:
+    RecentlyUsedScenePath-3:
       value: 260b1b2910410552030b4c16152e4f1c17031d650d3b3535393a5200e1e53a3df1a805e8ea2a33390a01ea3201701431fb1e10
       flags: 0
+    RecentlyUsedScenePath-4:
+      value: 22424703114646680e0b0227036c7c021313113e3f66333e243d04
+      flags: 0
     RecentlyUsedScenePath-5:
-      value: 22424703114646680e0b0227036c73150012147a7d66333e243d04
+      value: 22424703114646680e0b0227036c73150012147a7e66333e243d04
       flags: 0
     RecentlyUsedScenePath-6:
-      value: 22424703114646680e0b0227036c73150012147a7e66333e243d04
+      value: 22424703114646680e0b0227036c73150012147a7f66333e243d04
+      flags: 0
+    RecentlyUsedScenePath-7:
+      value: 22424703114646680e0b0227036c72111f19352f223d237e38271427fb
+      flags: 0
+    RecentlyUsedScenePath-8:
+      value: 22424703114646680e0b0227036c73150012147a7d66333e243d04
       flags: 0
     UnityEditor.ShaderGraph.Blackboard:
       value: 18135939215a0a5004000b0e15254b524c030a3f2964643d120d1230e9e93a3fd6e826abbd2e2d293c4ead313b08042de6030a0afa240c0d020be94c4ba75e435d8715fa32c70d15d11612dacc11fee5d3c5d1fe9ab1bf968e93e2ffcbc3e7e2f0b3ffe0e8b0be9af8ffaeffff8e85dd8390e69295889a94e981838bec8785838e86d6cbc4
@@ -37,6 +43,9 @@ EditorUserSettings:
       flags: 0
     UnityRemoteDevice:
       value: 225f4d46245b0d4902070862342649191512
+      flags: 0
+    UnityRemoteJoystickSource:
+      value: 315459091150
       flags: 0
     vcSharedLogLevel:
       value: 0d5e400f0650

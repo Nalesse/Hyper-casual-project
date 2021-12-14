@@ -1,3 +1,7 @@
 Fence: https://free3d.com/3d-model/fence-43609.html
 SkyBox: AllSky Free
 Police Model: "Male police v2" (https://skfb.ly/6QSFP) by Michael Constantine is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+Font: Fad Script by Ageng Jatmiko. https://www.1001freefonts.com/fad-script.font, Licence Plate USA https://www.dafont.com/license-plate-usa.font?text=Play
+Road Texture: https://3dtextures.me/2021/04/14/road-001/
+
+

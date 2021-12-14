@@ -21,6 +21,7 @@ public class LevelGenerator : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        // Spawns tiles at the start of the game so that the player can't see the tiles being spawned in front of them.
         for (int i = 0; i < tilesToPreSpawn; i++)
         {
             SpawnTile();
